@@ -1,0 +1,18 @@
+string passwordlama, passlama, passwordbaru, passbaru, konfirmasipassword, username;
+read passwordlama;
+read passwordbaru;
+read konfirmasipassword;
+
+resource querycek = mysqli_query($conn,"select * from admin_th where username = '$username' and password = 'passlama'");
+array count = mysqli_num_rows(querycek);
+write count;
+if (count == 1 && passwordbaru==konfirmasipassword)
+then
+	resource queryupdate = mysqli_query($conn,"update admin_th set password = 'passbaru' where username = 'username'");
+		if(queryupdate){
+		then
+			write "password successfully change";
+		endif
+else
+	write error;
+endif

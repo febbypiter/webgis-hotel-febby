@@ -1,0 +1,63 @@
+<html>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript">
+        function init(){
+            map = new google.maps.Map(document.getElementById('map'), 
+                {
+                  zoom: 13,
+                  center: new google.maps.LatLng(-0.303791, 100.372666),
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+              });
+
+            kecamatan = new google.maps.Data();
+              kecamatan.loadGeoJson('kecamatan.php');
+              kecamatan.setStyle(function(feature)
+              {
+                var gid = feature.getProperty('id');
+                if (gid == 'K001'){ 
+                  return({
+                    fillColor:'#ff3300',
+                    strokeWeight:0.1,
+                    strokeColor:'#ff3300',
+                    fillOpacity:0.1,
+                    clickable: false
+                  }); 
+              }
+                else if(gid == 'K002'){
+                  return({
+                    fillColor:'#ffd777',
+                    strokeWeight:0.1,
+                    strokeColor:'#ffd777',
+                    fillOpacity:0.1,
+                    clickable: false
+                  });
+              }
+                else if(gid == 'K003'){
+                  return({
+                    fillColor:'#00b300' ,
+                    strokeWeight:0.1,
+                    strokeColor:'#00b300' ,
+                    fillOpacity:0.1,
+                    clickable: false
+                  });
+              }
+              });
+              kecamatan.setMap(map);
+
+            tourism = new google.maps.Data();    
+              tourism.loadGeoJson('tourism.php');
+              tourism.setStyle(function(feature){
+                  return({
+                      fillColor: '#68dff0',
+                              strokeColor: '#68dff0',
+                              strokeWeight: 1,
+                              fillOpacity: 0.6
+                    });
+                });
+                tourism.setMap(map);
+        }
+</script>
+<body onload='init()'>
+<div id='map' style="width: 100%; height: 100%;"></div>
+</body>
+</html>
